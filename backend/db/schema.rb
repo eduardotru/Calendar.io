@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2018_11_07_030315) do
     t.datetime "dueDate"
     t.boolean "static"
     t.integer "owner"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

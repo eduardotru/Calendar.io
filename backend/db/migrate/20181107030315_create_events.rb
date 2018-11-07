@@ -5,6 +5,7 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.datetime :dueDate
       t.boolean :static
       t.integer :owner
+      t.integer :user_id
 
       t.timestamps
     end
