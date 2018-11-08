@@ -10,16 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_07_030315) do
+ActiveRecord::Schema.define(version: 2018_11_07_234947) do
 
   create_table "events", force: :cascade do |t|
     t.integer "duration"
     t.datetime "dueDate"
     t.boolean "static"
-    t.integer "owner"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "events_users", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "event_id", null: false
+    t.index ["event_id", "user_id"], name: "index_events_users_on_event_id_and_user_id"
+    t.index ["user_id", "event_id"], name: "index_events_users_on_user_id_and_event_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -31,6 +37,12 @@ ActiveRecord::Schema.define(version: 2018_11_07_030315) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users_users", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.index [nil, nil], name: "index_users_users_on_user_req_id_and_user_sent_id"
+    t.index [nil, nil], name: "index_users_users_on_user_sent_id_and_user_req_id"
   end
 
 end

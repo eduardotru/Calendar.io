@@ -2,13 +2,12 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :update, :destroy]
 
   def index
-    @events = Event.all
+    @events = Event.where(user_id: event_params[:user_id])
     json_response(@events)
   end
 
   # POST /events
   def create
-    puts "Hola"
     puts event_params
     @event = Event.create!(event_params)
     json_response(@event, :id)
