@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2018_11_07_234947) do
 
   create_table "users_users", id: false, force: :cascade do |t|
     t.integer "user_id", null: false
-    t.index [nil, nil], name: "index_users_users_on_user_req_id_and_user_sent_id"
+    t.index [nil, nil], name: "index_users_users_on_user_one_id_and_user_sent_id"
     t.index [nil, nil], name: "index_users_users_on_user_sent_id_and_user_req_id"
   end
 
