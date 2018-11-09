@@ -10,7 +10,7 @@ class EventsController < ApplicationController
   def create
     puts event_params
     @event = Event.create!(event_params)
-    json_response(@event, :id)
+    json_response(@event)
   end
 
   # GET /events/:id

@@ -8,41 +8,45 @@ class UsersController < ApplicationController
   end
 
   # POST /users
-def create
-  @user = User.create!(user_params)
-  json_response(@user, :username)
-end
+  def create
+    @userNew = User.create!(user_params)
+    json_response(@userNew)
+  end
 
-# GET /users/:id
-def show
-  json_response(@user)
-end
+  # GET /users/:id
+  def show
+    json_response(@user)
+  end
 
-# PUT /users/:id
-def update
-  @user.update(user_params)
-  head :no_content
-end
+  # PUT /users/:id
+  def update
+    @user.update(user_params)
+    head :no_content
+  end
 
-# DELETE /users/:id
-def destroy
-  @user.destroy
-  head :no_content
-end
+  # DELETE /users/:id
+  def destroy
+    @user.destroy
+    head :no_content
+  end
 
-private
+  def friends
+    puts(params)
 
-def user_params
-  # whitelist params
-  params.permit(:firstname,
-                :lastname,
-                :username,
-                :password,
-                :phone,
-                :email)
-end
+  end
 
-def set_user
-  @user = User.find(params[:id])
-end
-end
+  def user_params
+    # whitelist params
+    params.permit(:firstname,
+      :lastname,
+      :username,
+      :password,
+      :phone,
+      :email,
+      :friend)
+    end
+
+    def set_user
+      @user = User.find(params[:id])
+    end
+  end
