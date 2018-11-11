@@ -30,9 +30,13 @@ class UsersController < ApplicationController
     head :no_content
   end
 
-  def friends
-    puts(params)
+  def newFriend
+    Friendship.create(user_id:params[:user_id], friend_id:params[:friend_id])
+    Friendship.create(friend_id:params[:user_id], user_id:params[:friend_id])
+  end
 
+  def friendships
+    json_response(Friendship.all.select(:user_id, :friend_id).where(user_id: params[:user_id]))
   end
 
   def user_params
@@ -43,7 +47,7 @@ class UsersController < ApplicationController
       :password,
       :phone,
       :email,
-      :friend)
+      :friend_id)
     end
 
     def set_user

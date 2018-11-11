@@ -3,7 +3,7 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.where(user_id: event_params[:user_id])
-    json_response(@events)
+    json_response(@events.order('dueDate asc').where('dueDate >= ?', DateTime.now()))
   end
 
   # POST /events
