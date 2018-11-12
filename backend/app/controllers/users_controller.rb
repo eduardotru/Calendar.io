@@ -45,7 +45,6 @@ class UsersController < ApplicationController
     else
       @allUsers = User.where("username LIKE :userSearch", userSearch:"#{params[:username]}%")
       @allFriends = Friendship.all.select(:friend_id).where(user_id: params[:user_id])
-      # @allFriends.append(User.find(params[:user_id]))
       @noFriends = Array.new
 
       @allUsers.each do |u|
