@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :users do
     resources :events
-    #get '/users/id/friends', to: ''
+    post 'newFriend'
+    get 'friendships'
   end
+  resources :login
 end
