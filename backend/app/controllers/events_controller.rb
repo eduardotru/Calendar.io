@@ -39,7 +39,8 @@ class EventsController < ApplicationController
                   :static,
                   :owner,
                   :event,
-                  :user_id)
+                  :user_id,
+                  :name)
     end
 
     def set_event
