@@ -39,6 +39,14 @@ class UsersController < ApplicationController
     json_response(Friendship.all.select(:user_id, :friend_id).where(user_id: params[:user_id]))
   end
 
+  def findUsers
+    if (User.where("username LIKE :userSearch", userSearch:"%#{params[:username]}%").blank?)
+      json_response(-1)
+    else
+      json_response(User.where("username LIKE :userSearch", userSearch:"%#{params[:username]}%"))
+    end
+  end
+
   def user_params
     # whitelist params
     params.permit(:firstname,
