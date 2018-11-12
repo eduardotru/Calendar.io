@@ -40,10 +40,27 @@ class UsersController < ApplicationController
   end
 
   def findUsers
-    if (User.where("username LIKE :userSearch", userSearch:"%#{params[:username]}%").blank?)
+    if (User.where("username LIKE :userSearch", userSearch:"#{params[:username]}%").blank?)
       json_response(-1)
     else
-      json_response(User.where("username LIKE :userSearch", userSearch:"%#{params[:username]}%"))
+      @allUsers = User.where("username LIKE :userSearch", userSearch:"#{params[:username]}%")
+      @allFriends = Friendship.all.select(:friend_id).where(user_id: params[:user_id])
+      # @allFriends.append(User.find(params[:user_id]))
+      @noFriends = Array.new
+
+      @allUsers.each do |u|
+        @isFriend = false
+        @allFriends.each do |f|
+          if (f.friend_id == u.id)
+            @isFriend = true
+          end
+        end
+        if (!@isFriend)
+          @noFriends.append(u)
+        end
+      end
+      @noFriends.delete(User.find(params[:user_id]))
+      json_response(@noFriends)
     end
   end
 
