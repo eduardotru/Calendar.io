@@ -4,4 +4,5 @@ Rails.application.routes.draw do
     post 'newFriend'
     get 'friendships'
   end
+  resources :login
 end
